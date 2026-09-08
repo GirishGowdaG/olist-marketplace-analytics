@@ -1,5 +1,5 @@
 # Olist Business Case — Analysis & Findings
-### Brijesh Vaghela
+### Girish G Gowda
 
 12 findings from the Olist Brazilian E-Commerce dataset. For each finding: the business question, the SQL approach, the results, and the business insight it produces.
 

@@ -54,4 +54,4 @@ This table is populated by `python/sentiment_analysis.py`, not by a SQL INSERT. 
 
 ---
 
-*Author: Brijesh Vaghela | [LinkedIn](https://www.linkedin.com/in/brijesh-vaghela)*
+*Author: Girish G Gowda | [GitHub](https://github.com/GirishGowdaG)*

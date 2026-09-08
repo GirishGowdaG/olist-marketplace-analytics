@@ -53,4 +53,4 @@ The technique works by assigning a `ROW_NUMBER()` per customer ordered by month,
 
 ---
 
-*Author: Brijesh Vaghela | [LinkedIn](https://www.linkedin.com/in/brijesh-vaghela)*
+*Author: Girish G Gowda | [GitHub](https://github.com/GirishGowdaG)*

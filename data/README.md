@@ -57,4 +57,4 @@ These are documented fully in the main `README.md` but summarised here for refer
 
 ---
 
-*Author: Brijesh Vaghela | [LinkedIn](https://www.linkedin.com/in/brijesh-vaghela)*
+*Author: Girish G Gowda | [GitHub](https://github.com/GirishGowdaG)*

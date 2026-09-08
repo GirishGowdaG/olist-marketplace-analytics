@@ -57,4 +57,4 @@ For a complete picture: read all 12 findings alongside the SQL files in `sql/02_
 
 ---
 
-*Author: Brijesh Vaghela | [LinkedIn](https://www.linkedin.com/in/brijesh-vaghela)*
+*Author: Girish G Gowda | [GitHub](https://github.com/GirishGowdaG)*

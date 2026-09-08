@@ -74,4 +74,4 @@ The Olist dataset assigns a new `customer_id` per order — meaning one real per
 
 ---
 
-*Author: Brijesh Vaghela | [LinkedIn](https://www.linkedin.com/in/brijesh-vaghela) | [GitHub](https://github.com/Brijesh403)*
+*Author: Girish G Gowda | [GitHub](https://github.com/GirishGowdaG)*

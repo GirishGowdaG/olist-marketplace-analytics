@@ -351,7 +351,8 @@ olist-marketplace-analytics/
 │   └── 04_views/                                  ← Materialised views feeding Power BI
 │       ├── 01_cohort_retention_matrix.sql
 │       ├── 02_payments_by_state.sql
-│       └── 03_review_reason_summary.sql
+│       ├── 03_review_reason_summary.sql
+│       └── 04_reviews_by_category_sentiment.sql
 │
 ├── python/                                        ← NLP pipeline (see python/README.md)
 │   ├── load_reviews.py                            ← pandas loader — bypasses LOAD DATA INFILE
@@ -436,7 +437,7 @@ olist-marketplace-analytics/
 
 ```powershell
 # 1. Clone and enter the repo
-git clone https://github.com/Brijesh403/olist-marketplace-analytics.git
+git clone https://github.com/GirishGowdaG/olist-marketplace-analytics.git
 cd olist-marketplace-analytics
 
 # 2. Download the dataset from Kaggle into data/
@@ -473,4 +474,4 @@ python python/reason_analysis_v2.py
 
 ---
 
-**Brijesh Vaghela** · [LinkedIn](https://www.linkedin.com/in/brijesh-vaghela) · [GitHub](https://github.com/Brijesh403)
+**Girish G Gowda** · [GitHub](https://github.com/GirishGowdaG)

@@ -116,4 +116,4 @@ The SQL analytical views (`cohort_retention_matrix`, `payments_by_state`) must e
 
 ---
 
-*Author: Brijesh Vaghela | [LinkedIn](https://www.linkedin.com/in/brijesh-vaghela)*
+*Author: Girish G Gowda | [GitHub](https://github.com/GirishGowdaG)*
