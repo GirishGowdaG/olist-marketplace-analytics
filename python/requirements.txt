@@ -1,0 +1,24 @@
+# Olist Marketplace Analytics — Python dependencies
+# -------------------------------------------------------
+# Install order matters. Run this FIRST:
+#   pip install torch --index-url https://download.pytorch.org/whl/cpu
+# Then install everything else:
+#   pip install -r python/requirements.txt
+#
+# torch is intentionally excluded from this file because its
+# install URL is not on PyPI — mixing it in causes pip to fail
+# the entire requirements install with a resolver error.
+
+# ── Database ───────────────────────────────────────────────
+sqlalchemy>=2.0.0,<3.0.0     # ORM + engine used by all three scripts
+pymysql>=1.1.0,<2.0.0        # MySQL dialect for SQLAlchemy (mysql+pymysql://)
+
+# ── Data loading & manipulation ────────────────────────────
+pandas>=2.0.0,<3.0.0         # CSV loading, DataFrame transforms, SQL reads
+
+# ── NLP — Portuguese sentiment model ───────────────────────
+pysentimiento>=0.7.0         # BerTweet-PT sentiment model wrapper
+transformers>=4.36.0,<5.0.0  # HuggingFace backbone (pysentimiento dependency)
+
+# ── Progress & UX ──────────────────────────────────────────
+tqdm>=4.66.0,<5.0.0          # Live progress bar in sentiment_analysis.py

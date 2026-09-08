@@ -1,0 +1,86 @@
+﻿# ==============================================================================
+# Olist Marketplace Analytics — Comprehensive .gitignore
+# ==============================================================================
+
+# Python Virtual Environments
+.venv/
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# Byte-compiled / optimized / cache files
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Distribution / packaging
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Data Files (Raw Olist CSVs & ZIPs from Kaggle are excluded; data/README.md is tracked)
+data/*.csv
+data/*.zip
+data/*.gz
+data/*.parquet
+
+# Environment Variables & Secrets
+.env
+*.env
+.env.*
+*.secret
+*.pem
+*.key
+
+# Logs & Temporary Files
+*.log
+*.tmp
+*.temp
+*.bak
+*.swp
+*~
+thumbs.db
+ehthumbs.db
+
+# Operating System Files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# IDE & Editor Configurations
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+*.suo
+*.ntvs*
+*.njsproj
+*.user
+*.userosscache
+*.sln.docstates
+
+# Power BI Auto-Recovery / Temp Lock files
+*.pbix.temp
+*.pbit.temp

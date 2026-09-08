@@ -1,0 +1,152 @@
+<svg viewBox="0 0 980 670" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', system-ui, -apple-system, sans-serif">
+  <style>
+    .card{fill:#FFFFFF;stroke:#CBD5E1;stroke-width:1}
+    .tname{fill:#FFFFFF;font-weight:600;font-size:13px}
+    .tsub{fill:#FFFFFF;opacity:.82;font-size:9.5px}
+    .fld{fill:#334155;font-size:11.5px}
+    .meas{fill:#1B4D5B;font-size:11.5px;font-style:italic}
+    .tag{fill:#94A3B8;font-weight:600;font-size:9px}
+    .rel{stroke:#94A3B8;stroke-width:1.4;fill:none}
+    .rlbl{fill:#64748B;font-weight:500;font-size:10px;paint-order:stroke;stroke:#FFFFFF;stroke-width:3px;stroke-linejoin:round}
+    .title{fill:#0F172A;font-weight:700;font-size:16px}
+    .legend{fill:#475569;font-weight:500;font-size:11px}
+  </style>
+
+  <rect x="0" y="0" width="980" height="670" fill="#FFFFFF"/>
+
+  <!-- TITLE -->
+  <text class="title" x="490" y="34" text-anchor="middle">Olist Marketplace — Power BI Star Schema</text>
+  <text class="legend" x="490" y="52" text-anchor="middle">Import mode  ·  fact grain = order_items  ·  conformed key = order_id</text>
+
+  <!-- ===== RELATIONSHIP LINES (drawn first, sit behind cards) ===== -->
+  <!-- orders -> order_items (the spine, 1:*) -->
+  <path class="rel" d="M490 228 L490 410"/>
+  <circle cx="490" cy="228" r="3" fill="#94A3B8"/>
+  <circle cx="490" cy="410" r="3" fill="#94A3B8"/>
+  <text class="rlbl" x="500" y="247">1</text>
+  <text class="rlbl" x="500" y="400">&#8727;</text>
+  <text class="rlbl" x="500" y="323">order_id</text>
+  <!-- date -> orders -->
+  <path class="rel" d="M260 118 L380 110"/>
+  <text class="rlbl" x="320" y="105" text-anchor="middle">order_date</text>
+  <!-- customers -> orders -->
+  <path class="rel" d="M260 280 L380 172"/>
+  <text class="rlbl" x="322" y="231" text-anchor="middle">customer_id</text>
+  <!-- products -> order_items -->
+  <path class="rel" d="M260 424 L380 452"/>
+  <text class="rlbl" x="322" y="430" text-anchor="middle">product_id</text>
+  <!-- sellers -> order_items -->
+  <path class="rel" d="M260 558 L380 500"/>
+  <text class="rlbl" x="322" y="540" text-anchor="middle">seller_id</text>
+  <!-- payments -> orders -->
+  <path class="rel" d="M720 128 L600 116"/>
+  <text class="rlbl" x="660" y="107" text-anchor="middle">order_id</text>
+  <!-- reviews -> orders -->
+  <path class="rel" d="M720 298 L600 188"/>
+  <text class="rlbl" x="656" y="235" text-anchor="middle">order_id</text>
+  <!-- review_sentiment -> reviews (1:1) -->
+  <path class="rel" d="M825 430 L825 360"/>
+  <circle cx="825" cy="360" r="3" fill="#94A3B8"/>
+  <circle cx="825" cy="430" r="3" fill="#94A3B8"/>
+  <text class="rlbl" x="833" y="398" text-anchor="start">review_id (1:1)</text>
+
+  <!-- ===== DIMENSIONS (left column) ===== -->
+  <!-- dim_date -->
+  <rect class="card" x="50" y="58" width="210" height="139" rx="8"/>
+  <path d="M50 66 Q50 58 58 58 L252 58 Q260 58 260 66 L260 88 L50 88 Z" fill="#64748B"/>
+  <text class="tname" x="64" y="77">dim_date</text>
+  <text class="tsub" x="250" y="77" text-anchor="end">&#9733; marked</text>
+  <text class="fld" x="64" y="108"><tspan class="tag">PK </tspan>date_key</text>
+  <text class="fld" x="64" y="127">year</text>
+  <text class="fld" x="64" y="146">quarter</text>
+  <text class="fld" x="64" y="165">month_name</text>
+  <text class="fld" x="64" y="184">weekday</text>
+
+  <!-- dim_customers -->
+  <rect class="card" x="50" y="222" width="210" height="120" rx="8"/>
+  <path d="M50 230 Q50 222 58 222 L252 222 Q260 222 260 230 L260 252 L50 252 Z" fill="#64748B"/>
+  <text class="tname" x="64" y="241">dim_customers</text>
+  <text class="fld" x="64" y="272"><tspan class="tag">PK </tspan>customer_id</text>
+  <text class="fld" x="64" y="291">customer_unique_id</text>
+  <text class="fld" x="64" y="310">customer_state</text>
+  <text class="fld" x="64" y="329">customer_city</text>
+
+  <!-- dim_products -->
+  <rect class="card" x="50" y="366" width="210" height="120" rx="8"/>
+  <path d="M50 374 Q50 366 58 366 L252 366 Q260 366 260 374 L260 396 L50 396 Z" fill="#64748B"/>
+  <text class="tname" x="64" y="385">dim_products</text>
+  <text class="fld" x="64" y="416"><tspan class="tag">PK </tspan>product_id</text>
+  <text class="fld" x="64" y="435">category (EN)</text>
+  <text class="fld" x="64" y="454">weight_g</text>
+  <text class="fld" x="64" y="473">photos_qty</text>
+
+  <!-- dim_sellers -->
+  <rect class="card" x="50" y="510" width="210" height="101" rx="8"/>
+  <path d="M50 518 Q50 510 58 510 L252 510 Q260 510 260 518 L260 540 L50 540 Z" fill="#64748B"/>
+  <text class="tname" x="64" y="529">dim_sellers</text>
+  <text class="fld" x="64" y="560"><tspan class="tag">PK </tspan>seller_id</text>
+  <text class="fld" x="64" y="579">seller_state</text>
+  <text class="fld" x="64" y="598">seller_city</text>
+
+  <!-- ===== CENTRE SPINE ===== -->
+  <!-- dim_orders (hub) -->
+  <rect class="card" x="380" y="70" width="220" height="158" rx="8"/>
+  <path d="M380 78 Q380 70 388 70 L592 70 Q600 70 600 78 L600 100 L380 100 Z" fill="#64748B"/>
+  <text class="tname" x="394" y="89">dim_orders</text>
+  <text class="tsub" x="590" y="89" text-anchor="end">hub</text>
+  <text class="fld" x="394" y="120"><tspan class="tag">PK </tspan>order_id</text>
+  <text class="fld" x="394" y="139"><tspan class="tag">FK </tspan>customer_id</text>
+  <text class="fld" x="394" y="158"><tspan class="tag">FK </tspan>order_date</text>
+  <text class="fld" x="394" y="177">order_status</text>
+  <text class="fld" x="394" y="196">delivered_date</text>
+  <text class="fld" x="394" y="215">estimated_date</text>
+
+  <!-- fact_order_items (primary fact) -->
+  <rect class="card" x="380" y="410" width="220" height="139" rx="8"/>
+  <path d="M380 418 Q380 410 388 410 L592 410 Q600 410 600 418 L600 440 L380 440 Z" fill="#1B4D5B"/>
+  <text class="tname" x="394" y="429">fact_order_items</text>
+  <text class="tsub" x="590" y="429" text-anchor="end">line items</text>
+  <text class="fld" x="394" y="460"><tspan class="tag">FK </tspan>order_id</text>
+  <text class="fld" x="394" y="479"><tspan class="tag">FK </tspan>product_id</text>
+  <text class="fld" x="394" y="498"><tspan class="tag">FK </tspan>seller_id</text>
+  <text class="meas" x="394" y="517">price</text>
+  <text class="meas" x="394" y="536">freight_value</text>
+
+  <!-- ===== ORDER-GRAIN FACTS (right column) ===== -->
+  <!-- fact_payments -->
+  <rect class="card" x="720" y="70" width="210" height="120" rx="8"/>
+  <path d="M720 78 Q720 70 728 70 L922 70 Q930 70 930 78 L930 100 L720 100 Z" fill="#1B4D5B"/>
+  <text class="tname" x="734" y="89">fact_payments</text>
+  <text class="fld" x="734" y="120"><tspan class="tag">FK </tspan>order_id</text>
+  <text class="fld" x="734" y="139">payment_type</text>
+  <text class="fld" x="734" y="158">installments</text>
+  <text class="meas" x="734" y="177">payment_value</text>
+
+  <!-- fact_reviews -->
+  <rect class="card" x="720" y="240" width="210" height="120" rx="8"/>
+  <path d="M720 248 Q720 240 728 240 L922 240 Q930 240 930 248 L930 270 L720 270 Z" fill="#1B4D5B"/>
+  <text class="tname" x="734" y="259">fact_reviews</text>
+  <text class="fld" x="734" y="290"><tspan class="tag">PK </tspan>review_id</text>
+  <text class="fld" x="734" y="309"><tspan class="tag">FK </tspan>order_id</text>
+  <text class="fld" x="734" y="328">review_score (1-5)</text>
+  <text class="fld" x="734" y="347">comment_message</text>
+
+  <!-- review_sentiment (NEW) -->
+  <rect class="card" x="720" y="430" width="210" height="139" rx="8"/>
+  <path d="M720 438 Q720 430 728 430 L922 430 Q930 430 930 438 L930 460 L720 460 Z" fill="#B45309"/>
+  <text class="tname" x="734" y="449">review_sentiment</text>
+  <text class="tsub" x="920" y="449" text-anchor="end">NEW</text>
+  <text class="fld" x="734" y="480"><tspan class="tag">PK&#183;FK </tspan>review_id</text>
+  <text class="fld" x="734" y="499">sentiment_label</text>
+  <text class="fld" x="734" y="518">sentiment_score</text>
+  <text class="fld" x="734" y="537">model_name</text>
+  <text class="fld" x="734" y="556">scored_at</text>
+
+  <!-- ===== LEGEND ===== -->
+  <rect x="362" y="628" width="14" height="12" rx="2" fill="#1B4D5B"/>
+  <text class="legend" x="382" y="638">Fact</text>
+  <rect x="438" y="628" width="14" height="12" rx="2" fill="#64748B"/>
+  <text class="legend" x="458" y="638">Dimension</text>
+  <rect x="556" y="628" width="14" height="12" rx="2" fill="#B45309"/>
+  <text class="legend" x="576" y="638">New (this build)</text>
+</svg>
