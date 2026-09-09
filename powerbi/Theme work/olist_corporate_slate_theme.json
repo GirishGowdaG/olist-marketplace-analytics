@@ -1,0 +1,25 @@
+{
+  "name": "OlistCorporateSlate",
+  "dataColors": [
+    "#1E3A8A",
+    "#0D9488",
+    "#D97706",
+    "#DC2626",
+    "#475569",
+    "#6366F1",
+    "#059669",
+    "#B45309"
+  ],
+  "background": "#F8FAFC",
+  "foreground": "#0F172A",
+  "tableAccent": "#1E3A8A",
+  "visualStyles": {
+    "*": {
+      "*": {
+        "title": [{ "color": { "solid": { "color": "#0F172A" } }, "fontSize": 12, "fontFamily": "Segoe UI Semibold" }],
+        "background": [{ "color": { "solid": { "color": "#FFFFFF" } }, "transparency": 0 }],
+        "border": [{ "show": true, "color": { "solid": { "color": "#E2E8F0" } }, "radius": 4 }]
+      }
+    }
+  }
+}

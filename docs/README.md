@@ -1,59 +1,38 @@
-# docs — Business Documentation
+# docs — Architecture & Case Study Documentation
 
-Supporting documents for the Olist Marketplace Analytics project. Designed to be read alongside the SQL queries and dashboard — they explain the business *thinking* behind the technical work.
+## Overview
 
----
+The `docs/` directory contains strategic business documentation, analytical write-ups, and architectural assets detailing the multi-tier analytical platform built on the Olist Brazilian E-Commerce dataset.
 
-## Files
-
-| File | What It Contains |
-|---|---|
-| `business_case.md` | Detailed write-up of all 12 analytical findings — business question, SQL approach, results, and business interpretation for each |
-| `olist_data_model.svg` | Star schema diagram — the 8-table data model with relationship lines |
-
----
-
-## `business_case.md`
-
-A 12-finding business case document written from the perspective of an analyst presenting findings to a marketplace leadership team. Each finding follows the same structure:
-
-1. **The question a real team actually asks** — not "show me the data" but the specific decision the analysis is meant to support
-2. **SQL approach** — the technique used and *why* that technique was chosen over alternatives
-3. **Results** — the actual numbers from the dataset
-4. **Business insight** — what the numbers mean for platform strategy, not just what they show
-
-This document is the written equivalent of presenting your work in an analytics interview. Read it if you want to understand the business reasoning behind the technical choices.
-
-**Findings covered:**
-
-| Finding | Question |
-|---|---|
-| 01 | Which sellers dominate each product category? |
-| 02 | Which cities drive orders per state? |
-| 03 | What does Olist's revenue trajectory look like? |
-| 04 | How has each category's order volume accumulated? |
-| 05 | Is Olist's revenue growth accelerating or slowing? |
-| 06 | Do Olist customers come back after their first order? |
-| 07 | Who are Olist's most loyal customers? |
-| 08 | Which sellers outperform their state's average rating? |
-| 09 | How much does a late delivery hurt review scores? |
-| 10 | How does payment behaviour vary across Brazilian states? |
-| 11 | What does a typical Olist order look like? |
-| 12 | Capstone: The complete seller scorecard |
+```
+docs/
+├── business_case.md            ← Complete strategic analysis across 12 business findings
+├── interview_defensibility.md  ← Comprehensive interview guide and technical rationale
+└── olist_data_model.svg        ← Relational star/galaxy schema data model diagram
+```
 
 ---
 
-## `olist_data_model.svg`
+## Documents Summary
 
-A vector diagram of the 8-table star/galaxy schema. Open in any browser or SVG viewer. Useful for understanding table relationships before reading the SQL queries — especially which join paths exist between fact tables and which dimensions are shared.
+### 1. `business_case.md`
+A comprehensive business analysis written from the perspective of an analytics lead presenting to marketplace executive leadership. The case study structures findings into four strategic pillars:
+- **Pillar 1: Cross-Regional Economics & Freight Drag**: Evaluating how Brazilian geography impacts consumer pricing, delivery promises, and review satisfaction.
+- **Pillar 2: Order Fulfillment Latency Deconstruction**: Separating merchant dispatch handling from carrier transit network delays to isolate operational bottlenecks.
+- **Pillar 3: Seller Discipline & Category Concentration**: Quantifying platform dependency on dominant sellers and modeling multi-variable merchant reliability tiers.
+- **Pillar 4: Customer Voice & Repurchase Dynamics**: Analyzing repeat buyer basket size expansions and classifying root-cause dissatisfaction in Portuguese review text.
 
----
+### 2. `interview_defensibility.md`
+A deep technical preparation guide documenting every design decision, metric formulation, SQL CTE flow, Python NLP architecture, Power BI modeling technique, and limitations of the Olist dataset. Designed to ensure full transparency and credible, authentic interview articulation.
 
-## Where to start
-
-If you're short on time: Finding 06 (retention) and Finding 12 (seller scorecard) in `business_case.md` show the analytical depth. Add Finding 09 (delivery penalty) and the NLP section of the main README for the full narrative.
-
-For a complete picture: read all 12 findings alongside the SQL files in `sql/02_findings/` — each SQL file is documented to match its corresponding finding in the business case.
+### 3. `olist_data_model.svg`
+A scalable vector diagram illustrating the relational star/galaxy schema powering the project:
+- **Central Spine Fact**: `orders`
+- **Line Item Fact**: `order_items`
+- **Transaction Fact**: `order_payments`
+- **Customer Feedback Fact**: `order_reviews`
+- **Core Dimensions**: `customers`, `sellers`, `products`, `category_translation`
+- **Analytical Reporting Views**: Materialized view layer providing pre-aggregated KPIs to Power BI.
 
 ---
 

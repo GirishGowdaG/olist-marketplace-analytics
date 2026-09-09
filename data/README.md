@@ -1,59 +1,47 @@
-# data — Dataset
+# data — Olist Brazilian E-Commerce Dataset
 
-The raw CSV files are not tracked in this repository (they exceed GitHub's file size recommendations and are freely available from Kaggle). This folder exists locally but is gitignored.
+## Overview
 
----
+This project utilizes the [Brazilian E-Commerce Public Dataset by Olist](https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce), released under the CC BY-NC-SA 4.0 license.
 
-## How to Get the Data
+The dataset encompasses 99,441 actual commercial orders made at Olist between September 2016 and September 2018 across all 27 Brazilian states.
 
-1. Go to: https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce
-2. Click **Download** (requires a free Kaggle account)
-3. Extract the ZIP into this `data/` folder
-
-You should end up with these files:
-
-```
-data/
-├── olist_customers_dataset.csv
-├── olist_geolocation_dataset.csv
-├── olist_order_items_dataset.csv
-├── olist_order_payments_dataset.csv
-├── olist_order_reviews_dataset.csv       ← loaded by python/load_reviews.py
-├── olist_orders_dataset.csv
-├── olist_products_dataset.csv
-├── olist_sellers_dataset.csv
-└── product_category_name_translation.csv
-```
+> [!NOTE]
+> Raw CSV files and downloaded archives are excluded from Git tracking via `.gitignore` to maintain repository performance and avoid duplicating publicly accessible data files.
 
 ---
 
-## Dataset Overview
+## Dataset Schema & Contents
 
-| Table Loaded From | Rows | Key Columns |
-|---|---|---|
-| `olist_orders_dataset.csv` | 99,441 | order_id, customer_id, order_status, 5 timestamps |
-| `olist_order_items_dataset.csv` | 112,650 | order_id, seller_id, product_id, price, freight_value |
-| `olist_order_payments_dataset.csv` | 103,886 | order_id, payment_type, payment_installments, payment_value |
-| `olist_order_reviews_dataset.csv` | 99,224 | review_id, order_id, review_score, review_comment_message |
-| `olist_customers_dataset.csv` | 99,441 | customer_id, customer_unique_id, customer_city, customer_state |
-| `olist_products_dataset.csv` | 32,951 | product_id, product_category_name, physical dimensions |
-| `olist_sellers_dataset.csv` | 3,095 | seller_id, seller_city, seller_state |
-| `product_category_name_translation.csv` | 71 | Portuguese → English category names |
-| `olist_geolocation_dataset.csv` | 1M+ | Zip code → lat/lng (not used in this project) |
-
-**Total loaded:** ~530,000 rows across 8 tables (geolocation excluded)
-**Time period:** September 2016 – September 2018
-**Geography:** 27 Brazilian states
+| CSV Filename | Database Table | Row Count | Description |
+|---|---|---|---|
+| `olist_orders_dataset.csv` | `orders` | 99,441 | Order spine: status and timestamps (purchase, approved, carrier, delivered, estimated). |
+| `olist_order_items_dataset.csv` | `order_items` | 112,650 | Order line items: product ID, seller ID, item price, and freight value. |
+| `olist_order_payments_dataset.csv` | `order_payments` | 103,886 | Transaction records: payment type (credit card, boleto, voucher, debit), installments, and value. |
+| `olist_order_reviews_dataset.csv` | `order_reviews` | 99,224 | Customer feedback: 1–5 star scores and Portuguese comment text (42,370 with text). |
+| `olist_customers_dataset.csv` | `customers` | 99,441 | Customer geographic data (city, state, zip prefix) and true unique identifier (`customer_unique_id`). |
+| `olist_sellers_dataset.csv` | `sellers` | 3,095 | Seller geographic data (city, state, zip prefix). |
+| `olist_products_dataset.csv` | `products` | 32,951 | Product catalog: categories, name/description length, photos, and physical dimensions (weight, dimensions). |
+| `product_category_name_translation.csv` | `category_translation` | 71 | Mapping dictionary from Brazilian Portuguese category names to English. |
 
 ---
 
-## Known Data Quality Issues
+## Data Download & Reproduction Instructions
 
-These are documented fully in the main `README.md` but summarised here for reference:
+1. Download the archive from Kaggle:  
+   [https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce](https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce)
+2. Extract the CSV files directly into the `data/` directory.
+3. Verify that the files match the expected names listed above.
+4. Execute `sql/schema/01_create_schema.sql` and `sql/schema/02_load_data.sql` in MySQL.
+5. Ingest customer reviews via Python using `python -m python.main --task load_reviews`.
 
-1. **`olist_order_reviews_dataset.csv`** — contains embedded newlines in review text. `LOAD DATA INFILE` fails at row 77,917. This file must be loaded using `python/load_reviews.py` (pandas).
-2. **`product_category_name_translation.csv`** — Windows CRLF line endings leave `\r` on every English category name, silently breaking all JOINs on that column. Fixed with `UPDATE ... SET ... = REPLACE(column, '\r', '')` after loading.
-3. **`customer_unique_id` vs `customer_id`** — Olist assigns a new `customer_id` per order. One real customer can appear with multiple IDs. Always use `customer_unique_id` for person-level analysis (cohorts, retention, streaks).
+---
+
+## Data Quality Highlights
+
+1. **Embedded Newlines in Review Text**: The customer reviews file contains Brazilian Portuguese free text with raw line breaks and quotation characters. A custom CSV ingestion script (`python/src/review_loader.py`) parses multi-line records cleanly.
+2. **Carriage Returns in Translations**: Windows CRLF line terminations in `product_category_name_translation.csv` leave trailing `\r` characters on category names. The schema ingestion script strips these characters using `REPLACE(..., '\r', '')` to preserve join integrity.
+3. **Unique Customer Identification**: Olist issues a new `customer_id` for every transaction. Evaluating customer repurchase rates and retention requires grouping by `customer_unique_id`, which tracks the actual individual consumer over time.
 
 ---
 
